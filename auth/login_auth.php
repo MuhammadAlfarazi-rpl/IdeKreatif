@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //Set notifikasi selamat datang
             $_SESSION['notification'] = [
                 'type' => 'primary',
-            'message' => 'Registrasi Berhasil!'
+                'message' => 'Registrasi Berhasil!'
             ];
             //Redirect ke dashborad
             header('Location: ../dashboard.php');
