@@ -63,7 +63,9 @@ include './.includes/toast_notification.php';
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="proses_kategori.php" method="POST"
+                                        <form action="proses_kategori.php" method="POST">
+                                            <
+                                        </form>
                                     </div>
                                 </div>
                             </div>
