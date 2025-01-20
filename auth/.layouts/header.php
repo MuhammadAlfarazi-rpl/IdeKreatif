@@ -2,6 +2,7 @@
  session_start();
 
 $notification = $_SESSION['notification'] ?? null;
+include('.includes/toast_notification.php');
 if ($notification) {
   unset($_SESSION['notification']);
 }
