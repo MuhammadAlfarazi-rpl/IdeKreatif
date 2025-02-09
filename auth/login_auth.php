@@ -11,29 +11,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
+
         if (password_verify($password, $row["password"])) {
            $_SESSION["username"] = $username;
            $_SESSION["name"] = $row["name"];
            $_SESSION["role"] = $row["role"];
            $_SESSION["user_id"] = $row["user_id"];
 
-    $_SESSION["notification"] = [
+            $_SESSION['notification'] = [
                'type' => 'primary',
                'message' => 'Selamat Datang Kembali'
            ];
-
            header("Location: ../dashboard.php");
            exit();
+
         } else {
             $_SESSION["notification"] = [
                 'type' => 'danger',
-                'message' => 'Username / Password salah!'
+                'message' => 'Password salah!'
             ];
         }
 } else {
         $_SESSION["notification"] = [
             'type' => 'danger',
-            'message' => 'Username / Password salah!'
+            'message' => 'Username salah!'
         ];
     }
     header("Location: login.php");
