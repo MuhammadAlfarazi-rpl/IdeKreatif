@@ -23,3 +23,24 @@ if (isset($_POST['simpan'])) {
     header('Location: kategori.php');
     exit();
 }
+
+if (isset($_POST['delete'])) {
+    $catID = $_POST['catID'];
+
+    $exec = mysqli_query($conn, "DELETE FROM categories WHERE category_id='catID'");
+
+    if ($exec) {
+        $_SESSION['notification'] = [
+            'type' => 'primary',
+            'message' => 'Kategori Berhasil Dihapus!'
+        ];
+    } else {
+        $_SESSION['notification'] = [
+            'type' => 'danger',
+            'message' => "Kategori Gagal Dihapus.."
+        ];
+    }
+
+    header('Location: kategori.php');
+    exit();
+}
