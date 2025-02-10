@@ -27,7 +27,7 @@ if (isset($_POST['simpan'])) {
 if (isset($_POST['delete'])) {
     $catID = $_POST['catID'];
 
-    $exec = mysqli_query($conn, "DELETE FROM categories WHERE category_id='catID'");
+    $exec = mysqli_query($conn, "DELETE FROM categories WHERE category_id='$catID'");
 
     if ($exec) {
         $_SESSION['notification'] = [
