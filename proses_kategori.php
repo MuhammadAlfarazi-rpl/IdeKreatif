@@ -44,3 +44,26 @@ if (isset($_POST['delete'])) {
     header('Location: kategori.php');
     exit();
 }
+
+if (isset($_POST['update'])) {
+    $catID = $_POST['catID'];
+    $category_name = $_POST['category_name'];
+
+    $query = "UPDATE categories SET category_name = '$category_name' WHERE category_id='$catID'";
+    $exec = mysqli_query($conn, $query);
+
+    if ($exec) {
+        $_SESSION['notification'] = [
+            'type' => 'primary',
+            'message' => 'Kategori Berhasil Diperbarui!'
+        ];
+    } else {
+        $_SESSION['notification'] = [
+            'type' => 'danger',
+            'message' => "Kategori Gagal Diperbarui.."
+        ];
+    }
+
+    header('Location: kategori.php');
+    exit();
+}
