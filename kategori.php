@@ -126,7 +126,7 @@ include '.includes/toast_notification.php';
                         <label for="namaKategori" class="form-label">Nama Kategori</label>
 
                         <!-- Input nama kategori baru -->
-                         <input type="text" class="form-control" name="category-name" required/>
+                         <input type="text" class="form-control" name="category_name" required/>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
