@@ -2,19 +2,17 @@
 
 include '.includes/header.php';
 include '.includes/toast_notification.php';
-
 ?>
 
 <div class="container-xxl fleex-grow-1 container-p-y">
     <!-- Tabel Data Kategori -->
      <div class="card">
-        <div class="card-header d-flex justify-content-between-align-item-center">
+        <div class="card-header d-flex justify-content-between align-item-center">
             <h4>Data Kategori</h4>
             <!-- Tombol Kategori Baru -->
              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory">Tambah Kategori</button>
         </div>
-     </div>
-</div>
+     
 
 <div class="card-body">
     <div class="table-responsive text-norwap">
@@ -110,7 +108,12 @@ include '.includes/toast_notification.php';
 </div>
 </div>
 </div>
+</div>
+
+
 <?php include '.includes/footer.php'; ?>
+</div>
+
 
 <!-- Modal untuk Tambah Data -->
  <div class="modal fade" id="addCategory" tableindex="-1" aria-hidden="true">
@@ -137,3 +140,5 @@ include '.includes/toast_notification.php';
         </div>
     </div>
  </div>
+
+ 
