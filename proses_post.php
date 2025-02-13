@@ -56,3 +56,34 @@ if (isset($_POST['delete'])) {
     header('Location: dashboard.php');
     exit();
 }
+
+if (!empty($_FILES["image_path"]["name"])) {
+    $imageName = $_FILES["image_path"]["name"];
+    $imagePath = $imageDir . $imageName;
+
+    move_uploaded_file($_FILES["image_path"]["tmp_name"], $imagePath);
+
+    $queryOldImage = "SELECT image_path FROM posts WHERE id_post = $postId";
+    $resultOldImage = $conn->query($queryOldImage);
+    if ($resultOldImage->num_rows > 0) {
+        $oldImage = $resultOldImage->fetch_assoc()['image_path'];
+        if (file_exists($oldImage)) {
+            unlink($oldImage);
+        }
+    }
+} else {
+    $imagePathQuery = "SELECT image_path FROM posts WHERE id_post = $postId";
+    $result = $conn->query($imagePathQuery);
+    $imagePath = ($result->num_rows > 0) ? $result->fetch_assoc()['image_path'] : null;
+}
+
+$queryUpdate = "UPDATE posts SET post_title = '$postTitle', content = '$content', category_id = $categoryId, image_path = '$imagePath' WHERE id_post = $postId";
+if ($conn->query($queryUpdate) === TRUE) {
+    $_SESSION['notification'] = [
+        'type' => 'primary',
+        'image' => 'Postingan berhasil.'
+    ];
+}
+
+header('Location: dashboard.php');
+exit();
