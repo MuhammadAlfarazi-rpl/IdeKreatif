@@ -2,7 +2,7 @@
 include (".includes/header.php");
 $title = "Dashboard";
 
-include 'includes/toast_notification.php';
+include '.includes/toast_notification.php';
 ?>
 
 <div class="container-xxl flex-grow-1 container-p-y">
