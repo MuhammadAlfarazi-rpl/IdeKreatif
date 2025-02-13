@@ -2,7 +2,7 @@
 include 'config.php';
 session_start();
 
-$userId = $_SESSION["suer_id"];
+$userId = $_SESSION["user_id"];
 
 if (isset($_POST['simpan'])) {
     $postTitle = $_POST["post_title"];
@@ -11,7 +11,7 @@ if (isset($_POST['simpan'])) {
 
     $imageDir = "assets/img/uploads/";
     $imageName = $_FILES["image"]["name"];
-    $imagePath = $imageDir . basename($imagesName);
+    $imagePath = $imageDir . basename($imageName);
 
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath)) {
         $query = "INSERT INTO posts (post_title, content, created_at, category_id, user_id, image_path) VALUES ('$postTitle','$content', NOW(), $categoryId, $userId, '$imagePath')";

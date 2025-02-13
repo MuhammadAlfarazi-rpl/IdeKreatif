@@ -35,7 +35,7 @@ include '.includes/header.php';
                             $result = $conn->query($query);
                             if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "<option> value='". $row["category_id"] . "'>" . $row["category_name"] . "</option>";
+                                        echo "<option value='". $row["category_id"] . "'>" . $row["category_name"] . "</option>";
                                     }
                                 }
 
