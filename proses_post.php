@@ -40,7 +40,7 @@ exit();
 if (isset($_POST['delete'])) {
     $postID = $_POST['postID'];
 
-    $exec = mysqli_query($conn, "DELETE FROM posts WHERE id_post='$postID");
+    $exec = mysqli_query($conn, "DELETE FROM posts WHERE id_post='$postID'");
 
     if($exec) {
         $_SESSION['notification'] = [
