@@ -30,7 +30,7 @@ if (isset($_POST['simpan'])) {
     } else {
         $_SESSION['notification'] = [
         'type' => 'danger',
-        'message' => 'Failed to upload image..'
+        'message' => 'Failed to upload image..' . $conn->error
     ];
 }
 header('Location: dashboard.php');
