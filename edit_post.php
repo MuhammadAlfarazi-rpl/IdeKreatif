@@ -2,7 +2,7 @@
 include 'config.php';
 include '.includes/header.php';
 
-$postIdEdit = $_GET['post_id'];
+$postIdToEdit = $_GET['post_id'];
 
 $query = "SELECT * FROM posts WHERE id_post = $postIdToEdit";
 $result = $conn->query($query);
@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
                             <?php if (!empty($post['image_path'])): ?>
                                 <!-- Menampilkan gambar yang sudah diunggah -->
                                  <div class="mt-2">
-                                    <img src="<?= $post['image_post']; ?>" alt="CurrentImage" class="img-thumbnail" style="max-width: 200px;">
+                                    <img src="<?= $post['image_path']; ?>" alt="CurrentImage" class="img-thumbnail" style="max-width: 200px";>
                                  </div>
                                  <?php endif; ?>
                            </div>
