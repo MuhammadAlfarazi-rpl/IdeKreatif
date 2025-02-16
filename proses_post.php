@@ -7,7 +7,7 @@ $userId = $_SESSION["user_id"];
 if (isset($_POST['simpan'])) {
     $postTitle = $_POST["post_title"];
     $content = $_POST["content"];
-    $categoryId = $_POST["category_id"];
+    $categoryId = intval($_POST["category_id"]);
 
     $imageDir = "assets/img/uploads/";
     $imageName = $_FILES["image"]["name"];
