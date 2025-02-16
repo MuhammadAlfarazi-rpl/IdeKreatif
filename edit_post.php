@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
             <div class="card mb-4">
                 <div class="card-body">
                     <!-- Formulir metode POST untuk mengirim data -->
-                     <from method="POST" action="proses_post.php" enctype="multipart/form-data">
+                     <form method="POST" action="proses_post.php" enctype="multipart/form-data">
                         <!-- Input tersembunti menyimpan ID postingan -->
                          <input type="hidden" name="post_id" value="<?php echo $postIdToEdit; ?>">
 
@@ -49,7 +49,7 @@ if ($result->num_rows > 0) {
                            <div class="mb-3">
                             <label for="category_id" class="form-label">Kategori</label>
                             <select class="form-select" id="category_id" name="category_id" required>
-                                <option value="" selected disbaled>Select one</option>
+                                <option value="" selected disabled>Select one</option>
                                 <?php
                                 $queryCategories = "SELECT * FROM categories";
                                 $resultCategories = $conn->query($queryCategories);
@@ -72,7 +72,7 @@ if ($result->num_rows > 0) {
 
                             <!-- Tombol untuk memperbarui postingan -->
                              <button type="submit" name="update" class="btn btn-primary">Update</button>
-                     </from>
+                     </form>
                 </div>
             </div>
          </div>

@@ -57,33 +57,49 @@ if (isset($_POST['delete'])) {
     exit();
 }
 
-if (!empty($_FILES["image_path"]["name"])) {
-    $imageName = $_FILES["image_path"]["name"];
-    $imagePath = $imageDir . $imageName;
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
+    $postId = $_POST['post_id'];
+    $postTitle = $_POST["post_title"];
+    $content = $_POST["content"];
+    $categoryId = $_POST["category_id"];
+    $imageDir = "assets/img/uploads/";
 
-    move_uploaded_file($_FILES["image_path"]["tmp_name"], $imagePath);
+    if (!empty($_FILES["image_path"]["name"])) {
+        $imageName = $_FILES["image_path"]["name"];
+        $imagePath = $imageDir . $imageName;
 
-    $queryOldImage = "SELECT image_path FROM posts WHERE id_post = $postId";
-    $resultOldImage = $conn->query($queryOldImage);
-    if ($resultOldImage->num_rows > 0) {
-        $oldImage = $resultOldImage->fetch_assoc()['image_path'];
-        if (file_exists($oldImage)) {
-            unlink($oldImage);
+        move_uploaded_file($_FILES["image_path"]["tmp_name"], $imagePath);
+        
+        $queryOldImage = "SELECT image_path FROM posts WHERE id_post = $postId";
+        $resultOldImage = $conn->query($queryOldImage);
+        if ($resultOldImage->num_rows > 0) {
+            $oldImage = $resultOldImage->fetch_assoc()['image_path'];
+            if (file_exists($oldImage)) {
+                unlink($oldImage);
+            }
         }
+    } else {
+        $imagePathQuery = "SELECT image_path from posts where id_post = $postId";
+        $result = $conn->query($imagePathQuery);
+        $imagePath = ($result->num_rows > 0) ? $result->fetch_assoc()['image_path'] : null;
     }
-} else {
-    $imagePathQuery = "SELECT image_path FROM posts WHERE id_post = $postId";
-    $result = $conn->query($imagePathQuery);
-    $imagePath = ($result->num_rows > 0) ? $result->fetch_assoc()['image_path'] : null;
-}
 
-$queryUpdate = "UPDATE posts SET post_title = '$postTitle', content = '$content', category_id = $categoryId, image_path = '$imagePath' WHERE id_post = $postId";
-if ($conn->query($queryUpdate) === TRUE) {
-    $_SESSION['notification'] = [
-        'type' => 'primary',
-        'image' => 'Postingan berhasil.'
-    ];
-}
+    $queryUpdate = "UPDATE posts set post_title = '$postTitle', content = '$content', category_id = $categoryId, image_path = '$imagePath' where id_post = $postId";
 
-header('Location: dashboard.php');
-exit();
+    if ($conn->query($queryUpdate) === true ) {
+        // Berhasil
+            $_SESSION['notification'] = [
+                'type' => 'primary',
+                'message' => 'Post succsessfully updated.'
+            ];
+        } else {
+            $_SESSION['notification'] = [
+                'type' => 'danger',
+                'message' => 'Error updating post: ' . mysqli_error($conn)
+            ];
+        }
+        header('Location: dashboard.php');
+        exit();
+    }
+
+
