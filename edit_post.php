@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
                             <?php if (!empty($post['image_path'])): ?>
                                 <!-- Menampilkan gambar yang sudah diunggah -->
                                  <div class="mt-2">
-                                    <img src="<?= $post['image_path']; ?>" alt="CurrentImage" class="img-thumbnail" style="max-width: 200px";>
+                                    <img src="<?= $post['image_path']; ?>" alt="CurrentImage" class="img-thumbnail" style="max-width: 200px">
                                  </div>
                                  <?php endif; ?>
                            </div>
@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
                                 if ($resultCategories->num_rows > 0) {
                                     while ($row = $resultCategories->fetch_assoc()) {
                                         $selected = ($row["category_id"] == $post['category_id']) ? "selected" : "";
-                                        echo "<option value='" . $rows["category_id"] . "' $selected>" . $row["category_name"] . "</option>";
+                                        echo "<option value='" . $row["category_id"] . "' $selected>" . $row["category_name"] . "</option>";
                                     }
                                 }
                                 ?>

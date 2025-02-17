@@ -66,31 +66,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $categoryId = $_POST["category_id"];
     $imageDir = "assets/img/uploads/";
 
+    // Cek file baru
     if (!empty($_FILES["image_path"]["name"])) {
         $imageName = $_FILES["image_path"]["name"];
         $imagePath = $imageDir . $imageName;
 
+        // Pindahkan jika ada
         move_uploaded_file($_FILES["image_path"]["tmp_name"], $imagePath);
         
+        // Hapus gambar lama
         $queryOldImage = "SELECT image_path FROM posts WHERE id_post = $postId";
         $resultOldImage = $conn->query($queryOldImage);
         if ($resultOldImage->num_rows > 0) {
             $oldImage = $resultOldImage->fetch_assoc()['image_path'];
             if (file_exists($oldImage)) {
-                unlink($oldImage);
+                unlink($oldImage); //Dihapus
             }
         }
     } else {
-        $imagePathQuery = "SELECT image_path from posts where id_post = $postId";
+        // Jika tidak ada file baru, gunakan yang lama
+        $imagePathQuery = "SELECT image_path FROM posts WHERE id_post = $postId";
         $result = $conn->query($imagePathQuery);
         $imagePath = ($result->num_rows > 0) ? $result->fetch_assoc()['image_path'] : null;
     }
 
-    $queryUpdate = "UPDATE posts set post_title = '$postTitle', 
-    content = '$content', category_id = $categoryId, 
-    image_path = '$imagePath' where id_post = $postId";
+    $queryUpdate = "UPDATE posts SET post_title = '$postTitle', content = '$content', category_id = $categoryId, image_path = '$imagePath' WHERE id_post = $postId";
 
-    if ($conn->query($queryUpdate) === true ) {
+    if ($conn->query($queryUpdate) === TRUE ) {
         // Berhasil
             $_SESSION['notification'] = [
                 'type' => 'primary',
